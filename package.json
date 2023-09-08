@@ -1,0 +1,31 @@
+{
+  "name": "ltspice-state-machines",
+  "displayName": "LTSpice State Machine",
+  "description": "Syntax Highlight for LTSpice State Machines",
+  "version": "0.0.1",
+  "publisher": "Ted Kus",
+  "engines": {
+    "vscode": "^1.81.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "ltspice",
+      "aliases": ["ltspice", "LTSpice State Machine"],
+      "extensions": [".include", ".inc"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "ltspice",
+      "scopeName": "source.ltspice",
+      "path": "./syntaxes/ltspice.tmLanguage.json"
+    }],
+    "snippets": [
+      {
+          "language": "ltspice",
+          "path": "./snippets/snippets.json"
+      }]
+  }
+}

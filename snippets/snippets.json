@@ -1,0 +1,26 @@
+{
+    "Parameter": {
+        "prefix": ".par",
+        "body": [
+            ".param ${1:name} = ${2:value}"
+        ],
+        "description": "Parameter"
+    },
+    "If Statement": {
+        "prefix": "IF",
+        "body": "IF(${1:condition},\t${2:statement_block})",
+        "description": "If statement"
+    },
+    "If/Else Statement": {
+        "prefix": "IF",
+        "body": "IF(${1:condition},\t${2:statement_block},\t${3:statement_block2})",
+        "description": "If/Else statement"
+    },
+    "Machine": {
+        "prefix": ".mach",
+        "body": [
+            ".machine\n\t; State Definitions:$0\n\t.state\t$1state_a\t0 ; comment\n\t.state\t$2state_b\t1 ; comment\n\t; State Transition Rules:\n\t.rule\t$3state_a\t$4state_b\t$5condition1 $6operator $7condition2\n\t.rule\t$8state_a\t$9state_b\t$10condition1 $11operator $12condition2\n\t; State Outputs:\n\t.output\t($13variable)\tIF(state == 0$14,\t$15condition1,\t$16condition2)\n\t.output\t($17variable)\tIF(state == 1$18,\t$19condition1,\t$20condition2)\n.endmachine"		
+        ],
+        "description": "LTSpice State Machine"
+    }
+}

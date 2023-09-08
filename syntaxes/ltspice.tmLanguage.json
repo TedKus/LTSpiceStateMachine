@@ -1,0 +1,145 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "ltspice",
+    "patterns": [
+        {
+            "include": "#impossible"
+        },
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#parameters"
+        },
+        {
+            "include": "#states"
+        },
+        {
+            "include": "#rules"
+        },
+        {
+            "include": "#outputs"
+        },
+        {
+            "include": "#operators"
+        }
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "match": ";.*$",
+                    "name": "comment.line.ltspice"
+                }
+            ]
+        },
+        "impossible": {
+            "comment": "This is a special rule that should be used where no match is desired. It is not a good idea to match something like '1{0}' because in some cases that can result in infinite loops in token generation. So the rule instead matches and impossible expression to allow a match to fail and move to the next token.",
+            "match": "$.^"
+        },
+        "outputs": {
+            "patterns": [
+                {
+                    "match": "(^\\s*\\.output)",
+                    "name": "keyword.output.ltspice"
+                },
+                {
+                    "match": "(?<=\\.output\\s+)\\b[A-Za-z0-9_]+\\b",
+                    "name": "variable.output.ltspice"
+                },
+                {
+                    "match": "\\b(V|IF|I)\\(",
+                    "name": "support.function.ltspice"
+                }
+            ]
+        },
+        "parameters": {
+			"patterns": [
+				{
+					"match": "^\\s*\\.param\\b",
+					"name": "keyword.ltspice"
+				},
+				{
+					"begin": "^\\s*\\.param\\b",
+					"end": "(?<!\\\\)$",
+					"patterns": [
+						{
+							"match": "\\s*\\+\\s*[^\\n]+",
+							"name": "continuation.parameter.ltspice"
+						}
+					]
+				}
+			]
+		},
+        "states": {
+			"patterns": [
+				{
+					"name": "keyword.state.ltspice",
+					"match": "^\\s*\\.state\\b"
+				  },
+				  {
+					"name": "variable.state.ltspice",
+					"match": "(?<=\\.state\\s+)\\b[A-Za-z0-9_]+\\b"
+				  },
+				  {
+					"name": "property.state.ltspice",
+					"match": "(?<=\\.state\\s+[A-Za-z_]+\\s+)\\b[A-Za-z0-9_]+\\b"
+				  },
+				  {
+					"name": "comment.ltspice",
+					"begin": ";",
+					"end": "$"
+				  }
+			]
+		},
+        "rules": {
+            "patterns": [
+                {
+                    "match": "(^\\s*\\.rule)",
+                    "name": "keyword.rule.ltspice"
+                },
+				{
+				  "name": "parameter.rule.ltspice",
+				  "match": "(?<=\\.rule\\s+)\\b[A-Za-z0-9_]+\\b"
+				},
+				{
+				  "name": "parameter.rule.ltspice",
+				  "match": "(?<=\\.rule\\s+)\\b[A-Za-z0-9_]+\\b"
+				},
+                {
+                    "match": "\\b(V|IF|I)\\(",
+                    "name": "support.function.ltspice"
+                },
+				{
+					"match": "(?<=V\\()\\b\\w+\\b",
+					"name": "variable.support.function.ltspice"
+				}
+            ]
+        },
+		"operators": {
+            "patterns": [
+                {
+                    "match": "(?x)\n     <<= | >>= | //= | \\*\\*=\n    | \\+= | -= | /= | @=\n    | \\*= | %= | ~= | \\^= | &= | \\|=\n    | =(?!=) | == | >= | <= | > | < | \\|\n    | != | \\* | / | \\+ | -\n",
+                    "name": "keyword.operator.ltspice"
+                }
+            ]
+        }
+    },
+	"uuid": "c94b3b61-2f6b-45b8-9804-01f8f8aefbb2",
+	"semanticHighlighting": true,
+	"completions": [
+		{
+		  "trigger": ".state",
+		  "contents": ".state $0 $1 ; $2"
+		},
+		{
+		  "trigger": ".rule",
+		  "contents": ".rule $0 $1 IF($2) ; $3"
+		},
+		{
+		  "trigger": ".output",
+		  "contents": ".output $0 IF($1) ; $2"
+		}
+	  ],
+    "scopeName": "source.ltspice"
+}
