@@ -2,7 +2,7 @@
     "Parameter": {
         "prefix": ".par",
         "body": [
-            ".param ${1:name} = ${2:value}"
+            ".param ${1:variable_name} = ${2:value}"
         ],
         "description": "Parameter"
     },
@@ -19,8 +19,29 @@
     "Machine": {
         "prefix": ".mach",
         "body": [
-            ".machine\n\t; State Definitions:$0\n\t.state\t$1state_a\t0 ; comment\n\t.state\t$2state_b\t1 ; comment\n\t; State Transition Rules:\n\t.rule\t$3state_a\t$4state_b\t$5condition1 $6operator $7condition2\n\t.rule\t$8state_a\t$9state_b\t$10condition1 $11operator $12condition2\n\t; State Outputs:\n\t.output\t($13variable)\tIF(state == 0$14,\t$15condition1,\t$16condition2)\n\t.output\t($17variable)\tIF(state == 1$18,\t$19condition1,\t$20condition2)\n.endmachine"		
+            ".machine\n\t; State Definitions:$0\n\t.state\t${1:state_a}\t${2:state_a_value} ; ${3:comment}\n\t.state\t${4:state_b}\t${5:state_b_value} ; ${6:comment}\n\t; State Transition Rules:\n\t.rule\t${1:state_a}\t${4:state_b}\t(${9:condition1} ${10:operator} ${11:condition2}) ; ${12:comment}\n\t.rule\t${4:state_b}\t${1:state_a}\t(${13:condition1} ${14:operator} ${15:condition2}) ; ${16:comment}\n\t; State Outputs:\n\t.output\t(${17:variable_name})\tIF(state == ${2:state_a_value},\t${18:condition1},\t${19:condition2}) ; ${20:comment}\n\t.output\t(${22:variable_name})\tIF(state == ${5:state_b_value},\t${24:condition1},\t${25:condition2}) ; ${26:comment}\n.endmachine"
         ],
         "description": "LTSpice State Machine"
+    },
+    "State": {
+        "prefix": ".state",
+        "body": [
+            ".state\t${1:state_a}\t${2:state_a_value} ; ${3:comment}"
+        ],
+        "description": "State Declaration"
+    },
+    "Rule": {
+        "prefix": ".rule",
+        "body": [
+            ".rule\t${1:old_state}\t${2:new_state} \t(${3:condition1} ${4:operator} ${5:condition2})\t; ${6:comment}"
+        ],
+        "description": "Rule Declaration"
+    },
+    "Output": {
+        "prefix": ".output",
+        "body": [
+            ".output\t(${1:variable_name})\tIF(state == ${2:state_value}, ${3:condition1}, ${4:condition2}) \t; ${5:comment}"
+        ],
+        "description": "Output Declaration"
     }
 }
