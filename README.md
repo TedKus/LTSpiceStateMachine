@@ -1,10 +1,9 @@
-# ltspice-state-machines README
+# LTSpice State Machines README
 
-This is the README for "ltspice-state-machines".
-Highlights LTSpice State Machines
-Suggests Snippets of State Machine elements
+This extension offers textual Highlights of LTSpice State Machines
+Also suggests common Snippets of the various State Machine elements
 
-LTspice XVII includes an arbitrary state machine and introduces a new programming language called Contraption Programming Language. There are five new commands:
+LTspice XVII includes an arbitrary state machine and introduces a new programming language called Contraption Programming Language. There are five commands:
 ```ltspice
    .mach[ine] [<tripdt>] ; tripdt is an optional temporal tolerance
    .state <name> <value>
@@ -69,3 +68,7 @@ First time trying this!
 Initial release of LTSpice State Machines
 
 **Enjoy!**
+## [0.0.2]
+
+- Correct the Markdown and add animation
+
