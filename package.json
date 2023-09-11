@@ -2,7 +2,7 @@
   "name": "ltspice-state-machines",
   "displayName": "LTSpice State Machine",
   "description": "Syntax Highlight for LTSpice State Machines",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "TedKus",
   "homepage": "https://github.com/TedKus/LTSpiceStateMachine",
 	"repository": {
