@@ -5,18 +5,26 @@ Highlights LTSpice State Machines
 Suggests Snippets of State Machine elements
 
 LTspice XVII includes an arbitrary state machine and introduces a new programming language called Contraption Programming Language. There are five new commands:
-
+```ltspice
    .mach[ine] [<tripdt>] ; tripdt is an optional temporal tolerance
    .state <name> <value>
    .rule <old state> <new state> <condition>
    .output (node) <expression>
    .endmach[ine] ; end of block
+```
 
-For more details, visit: https://ltwiki.org/LTspiceHelpXVII/LTspiceHelp/html/DotMachine.htm
+For more details on LTSpice, visit: https://ltwiki.org/LTspiceHelpXVII/LTspiceHelp/html/DotMachine.htm
+
+Github repository:
+https://github.com/TedKus/LTSpiceStateMachine
+
+
+![Alt text](ltspice_language.gif)
 
 ## Features
 
-; type: .machine
+```ltspice
+; type: .mach
 .machine
     ; State Definitions:
     .state	state_a	state_a_value ; comment
@@ -28,14 +36,20 @@ For more details, visit: https://ltwiki.org/LTspiceHelpXVII/LTspiceHelp/html/Dot
     .output	(variable_name)	IF(state == state_a_value,	condition1,	condition2) ; comment
     .output	(variable_name)	IF(state == state_b_value,	condition1,	condition2) ; comment
 .endmachine
+
 ; type: .state
 .state	state_a	state_a_value ; comment
+
 ; type: .rule
 .rule	start_state	finish_state 	(condition1 operator condition2)	; comment
+
 ; type: .output
 .output	(variable_name)	IF(state == state_value, condition1, condition2) 	; comment
+
 ; type: .par
 .param variable_name = value
+
+```
 
 ## Requirements
 
